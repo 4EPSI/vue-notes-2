@@ -48,6 +48,7 @@ import search from './components/Search.vue';
         note: {
           title: '',
           desc: '',
+          priority: 'Standard'
         },
         notes: [
           {
@@ -85,7 +86,7 @@ import search from './components/Search.vue';
     methods: {
       addNote() {
         // console.log(this.note)
-        const { title, desc } = this.note
+        const { title, desc, priority } = this.note
 
         if(title.trim() === '' || desc.trim() === '') {
           this.message = 'title can`t be empty'
@@ -95,10 +96,12 @@ import search from './components/Search.vue';
         this.notes.push({
           title: title,
           desc: desc,
+          priority: priority || 'Standard',
           date: new Date(Date.now()).toLocaleString()
         })
         this.note.title = '',
-        this.note.desc = ''
+        this.note.desc = '',
+        this.note.priority = 'Standard'
         this.message = null
       },
       removeNote(index) {
