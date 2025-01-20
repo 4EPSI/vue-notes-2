@@ -54,17 +54,23 @@ import search from './components/Search.vue';
           {
             title: 'First Note',
             desc: 'Description for first note',
-            date: new Date(Date.now()).toLocaleString()
+            date: new Date(Date.now()).toLocaleString(),
+            isEditingTitle: false,
+            isEditingDesc: false
           },
           {
             title: 'Second Note',
             desc: 'Description for second note',
-            date: new Date(Date.now()).toLocaleString()
+            date: new Date(Date.now()).toLocaleString(),
+            isEditingTitle: false,
+            isEditingDesc: false
           },
           {
             title: 'Third Note',
             desc: 'Description for third note',
-            date: new Date(Date.now()).toLocaleString()
+            date: new Date(Date.now()).toLocaleString(),
+            isEditingTitle: false,
+            isEditingDesc: false
           }
         ]
       }

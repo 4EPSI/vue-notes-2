@@ -6,11 +6,26 @@
       v-for="(note, index) in notes" :key="index"
     >
       <div class="note-header" :class="{ full: !grid }">
-        <p>{{ note.title}}</p>
+        <p v-if="!note.isEditingTitle" @click="enableEditing(note, 'title')">{{ note.title}}</p>
+
+        <input 
+          v-else 
+          type="text" 
+          v-model="note.title" 
+          @blur="disableEditing(note, 'title')" 
+          @keyup.enter="disableEditing(note, 'title')"
+        />
+
         <p @click="removeNote(index)" style="cursor: pointer;">x</p>
       </div>
       <div class="note-body">
-        <p>{{ note.desc }}</p>
+        <p v-if="!note.isEditingDesc" @click="enableEditing(note, 'desc')">{{ note.desc }}</p>
+        <textarea 
+          v-else 
+          v-model="note.desc" 
+          @blur="disableEditing(note, 'desc')" 
+          @keyup.enter="disableEditing(note, 'desc')"
+        ></textarea>
         <span>{{ note.date }}</span>
       </div>
     </div>
@@ -30,6 +45,20 @@
       }
     },
     methods: {
+      enableEditing(note, field) {
+        if (field === 'title') {
+          note.isEditingTitle = true;
+        } else if (field === 'desc') {
+          note.isEditingDesc = true;
+        }
+    },
+    disableEditing(note, field) {
+      if (field === 'title') {
+        note.isEditingTitle = false;
+      } else if (field === 'desc') {
+        note.isEditingDesc = false;
+      }
+    },
       removeNote(index) {
         this.$emit('remove', index)
         console.log(index)
