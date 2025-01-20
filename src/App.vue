@@ -105,7 +105,18 @@ import search from './components/Search.vue';
         this.message = null
       },
       removeNote(index) {
-        this.notes.splice(index, 1)
+        // this.notes.splice(index, 1)
+        const noteToRemove = this.notesFilter[index];
+        const originalIndex = this.notes.findIndex(note => 
+          note.title === noteToRemove.title &&
+          note.desc === noteToRemove.desc &&
+          note.date === noteToRemove.date &&
+          note.priority === noteToRemove.priority
+        );
+
+        if (originalIndex !== -1) {
+          this.notes.splice(originalIndex, 1);
+        }
       }
     },
   }
